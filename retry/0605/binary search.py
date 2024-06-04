@@ -1,3 +1,5 @@
+#이진탐색
+
 def get_item(name, what, endpoint, start=1, end=None):
     """
     이진탐색으로 Grab the JSON payload 
@@ -49,8 +51,35 @@ def get_item(name, what, endpoint, start=1, end=None):
                 # 이름이 알파벳순으로 현재 이름보다 앞에 있으면 데이터 절반의 왼쪽에서 검색
                 return get_item(name, what, endpoint, start, mid - 1)
             elif name > current_name:
+
                 # 이름이 알파벳순으로 현재 이름보다 뒤에 있으면 데이터 절반의 오른쪽에서 검색
                 return get_item(name, what, endpoint, mid + 1, end)    
     else:
         # response wasn't ok, use code to determine why
         print(f'Response not OK, status: {response.status_code}')
+
+#이진탐색 일반
+def binary_search(arr, target):
+    left, right = 0, len(arr) - 1
+    
+    while left <= right:
+        mid = (left + right) // 2
+        if arr[mid] == target:
+            return mid
+        elif arr[mid] < target:
+            left = mid + 1
+        else:
+            right = mid - 1
+    
+    return -1
+
+# 예시 사용법
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+target = 7
+
+result = binary_search(arr, target)
+
+if result != -1:
+    print(f"타겟 값 {target}은(는) 배열의 인덱스 {result}에 있습니다.")
+else:
+    print(f"타겟 값 {target}을(를) 배열에서 찾을 수 없습니다.")
